@@ -1,0 +1,263 @@
+/* ======== RESET ======== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* LOGO */
+.logo {
+    margin-top: 10px;
+    margin-left: 65%;
+}
+
+.container {
+    display: flex;
+    margin-top: 10%;
+    background-color: white;
+}
+
+.left-side {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+.car-image {
+    width: 70%;
+    opacity: 0.92;
+}
+
+.right-side {
+    width: 50%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    width: 150px;
+    margin-bottom: 25px;
+}
+
+h2 {
+    color: #32a68a;
+    margin-bottom: 25px;
+    font-size: 24px;
+}
+
+/* ======== NOVO: Linha para input + ícone ao lado ======== */
+.input-row {
+    display: flex;
+    align-items: center;
+    width: 406px;
+    margin-bottom: 15px;
+    gap: 10px; /* Mantém espaçamento igual ao que já existia visualmente */
+}
+
+.input-row1 {
+    display: flex;
+    align-items: center;
+    width: 430px;
+    margin-bottom: 15px;
+    gap: 10px; /* Mantém espaçamento igual ao que já existia visualmente */
+}
+
+/* ======== INPUT ======== */
+.input-box {
+    flex: 1;
+    height: 32px;
+    background: white;
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    position: relative;
+}
+
+
+.input-box input:focus {
+    border: none;
+    outline: none;
+}
+
+/* borda preta no input-box quando ativo */
+.input-box:focus-within {
+    border: 2px solid #000000;
+}
+
+.input-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #555;
+}
+
+/* icons */
+.input-icon1 {
+    width: 15px;
+    opacity: 0.8;
+    margin-right: 10px;
+}
+
+.input-icon2 {
+    opacity: 0.8;
+    margin-right: 10px;
+}
+
+.status-icon {
+    opacity: 0.8;
+}
+
+/* ======== SWITCH ======== */
+.auto-box {
+    width: 330px;
+    display: flex;
+    align-items: center;
+    margin: 10px 0 20px 95px;
+    position: relative;
+    color: #555;
+    font-size: 14px;
+}
+
+.auto-box span {
+    flex: 1;
+}
+
+.switch {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+    background-color: #ccc;
+    border-radius: 20px;
+    transition: .3s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    border-radius: 50%;
+    transition: .3s;
+}
+
+input:checked + .slider {
+    background-color: #2f9d85;
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+.status-icon-small {
+    width: 16px;
+    opacity: 0.8;
+}
+
+/* ======== BOTÃO ======== */
+.btn {
+    width: 406px;
+    padding: 12px;
+    background: #b9c0c4;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #a4adb3;
+}
+
+
+
+/* =======================
+   MEDIA QUERY (até 950px)
+   ======================= */
+@media (max-width: 950px) {
+
+    /* container vira coluna */
+    .container {
+        flex-direction: column;
+        margin-top: 40px;
+    }
+
+    /* lado esquerdo (imagem do carro) desaparece — evita quebrar o layout */
+    .left-side {
+        display: none;
+    }
+
+    /* lado direito vira 100% da tela */
+    .right-side {
+        width: 100%;
+        padding: 20px;
+        border-left: none;
+    }
+
+    /* logo centralizada */
+    .logo {
+        margin: 20px auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    /* inputs ocupam a tela corretamente */
+    .input-row {
+        width: 90%;
+        gap: 8px;
+    }
+
+     .input-row1 {
+        width: 100%;
+        gap: 8px;
+    }
+
+    .input-box {
+        height: 36px;
+    }
+
+    .input-box input {
+        font-size: 16px;
+    }
+
+    /* botão 100% */
+    .btn {
+        width: 90%;
+        padding: 14px;
+        font-size: 16px;
+    }
+
+    /* auto-login ajustado */
+    .auto-box {
+        width: 100%;
+        margin: 15px 0;
+        justify-content: space-between;
+        margin-left: 0;
+    }
+}
