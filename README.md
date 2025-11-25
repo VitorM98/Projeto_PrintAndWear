@@ -10,11 +10,15 @@ COMO RODAR O DASHBOARD:
 
 1.PRIMEIRO É NECESSÁRIO BAIXAR A API QUE ESTÁ NO LINK: https://github.com/VitorM98/api-sprint7
 2.ABRIR O TERMINAL CMD DA API E ESCREVER OS SEGUINTES COMANDOS (um de cada vez): 
+
 npm init -y
+
 npm i express
+
 npm i cors
 
 3.NO ARQUIVO "PACKAGE.JSON" DENTRO DA PASTA API substituir a linha "test": "echo \"Error: no test specified\" && exit 1" por essa linha: "start": "node api.js"
+
 4. ESCREVER NO TERMINAL CMD O COMANDO PARA RODAR A API: npm start
 
 DEPOIS DE TER FEITO TUDO ISSO É SÓ CLONAR ESSE REPOSITORIO EM UMA NOVA JANELA DO VSCODE COM O SEGUINTE COMANDO NO TERMINAL CMD: git clone https://github.com/VitorM98/sprint7.git
