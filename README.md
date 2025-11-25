@@ -1,59 +1,21 @@
-# Sprint7
+DASHBOARD DA FORD <img width="225" height="131" alt="image" src="https://github.com/user-attachments/assets/fe724331-68fc-4123-98d3-f72def9a1bc7" />
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.19.
+SPRINT REALIZADA DO CURSO DE FRONT-END DA FORD EM PARCERIA COM O SENAI/CIMATEC
 
-## Development server
+1. REALIZAÇÃO DE LOGIN COM AUTENTICAÇÃO PARA PROTEGER AS PAGINAS DE HOME E DASHBOARD.
+2. CRIAÇÃO DE DASHBOARD INTERATIVO PARA COMPARAÇÃO DE VEÍCULOS
+3. CRIAÇÃO REALIZADA EM ANGULAR
 
-To start a local development server, run:
+COMO RODAR O DASHBOARD: 
 
-```bash
-ng serve
-```
+1.PRIMEIRO É NECESSÁRIO BAIXAR A API QUE ESTÁ NO LINK: https://github.com/VitorM98/api-sprint7
+2.ABRIR O TERMINAL CMD DA API E ESCREVER OS SEGUINTES COMANDOS (um de cada vez): 
+npm init -y
+npm i express
+npm i cors
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+3.NO ARQUIVO "PACKAGE.JSON" DENTRO DA PASTA API substituir a linha "test": "echo \"Error: no test specified\" && exit 1" por essa linha: "start": "node api.js"
+4. ESCREVER NO TERMINAL CMD O COMANDO PARA RODAR A API: npm start
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+DEPOIS DE TER FEITO TUDO ISSO É SÓ CLONAR ESSE REPOSITORIO EM UMA NOVA JANELA DO VSCODE COM O SEGUINTE COMANDO NO TERMINAL CMD: git clone https://github.com/VitorM98/sprint7.git
+E APÓS FAZER ISSO É SÓ DAR UM COMANDO PARA RODAR O DASHBOARD: npx ng serve 
