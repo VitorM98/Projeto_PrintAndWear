@@ -6,7 +6,8 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-pedido',
-  // O FormsModule precisa estar aqui para habilitar o ngModel no template.
+  // O FormsModule e o FabContactComponent precisam estar aqui.
+  standalone: true, // Adicionado (se não estava, deve estar para projetos Standalone)
   imports: [FormsModule, FabContactComponent], 
   templateUrl: './pedido.component.html',
   styleUrl: './pedido.component.css'
@@ -80,10 +81,26 @@ export class PedidoComponent {
     }
   }
 
-  // 7. Lógica de Cálculo de Frete (Mockado)
+  // 7. Lógica de Cálculo de Frete (Com Máscara de CEP)
   calcularFrete() {
-    const cepValue = this.cep().replace(/\D/g, ''); // Remove não-dígitos
-    if (cepValue.length === 8) {
+    // 1. Remove qualquer caractere que não seja dígito.
+    let cepValue = this.cep().replace(/\D/g, ''); 
+
+    // 2. Limita o valor a um máximo de 8 dígitos.
+    if (cepValue.length > 8) {
+      cepValue = cepValue.substring(0, 8);
+    }
+
+    // 3. Aplica a máscara de formatação (5 dígitos + hífen + 3 dígitos)
+    if (cepValue.length > 5) {
+      cepValue = cepValue.replace(/^(\d{5})(\d)/, '$1-$2');
+    }
+
+    // 4. Atualiza o signal 'cep' com o valor formatado/limitado.
+    this.cep.set(cepValue); 
+
+    // 5. Verifica o tamanho final (9 caracteres no formato "00000-000") para o cálculo do frete
+    if (cepValue.length === 9) { 
       // Simulação: Frete de R$15.00 para CEPs válidos
       this.frete.set(15.00);
     } else {

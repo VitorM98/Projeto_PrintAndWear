@@ -104,7 +104,7 @@
         <input type="text" id="cep" [ngModel]="cep()" 
                (ngModelChange)="cep.set($event)"
                (blur)="calcularFrete()"
-               name="cep" placeholder="00000-000" required>
+               name="cep" placeholder="00000-000" required maxlength="9">
       </div>
 
       <!-- Outros campos de endereço (não ligados a Signals, apenas para completar o formulário) -->
