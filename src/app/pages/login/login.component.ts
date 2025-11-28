@@ -11,10 +11,13 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-
+public termoAceito: boolean = false;
 constructor(private authService:AuthService, private router:Router){}
 
 login(){
+  if (!this.termoAceito){
+    return;
+  }
   this.authService.login(this.usuario).subscribe({
     next:(response)=>{
       this.router.navigate(["/home"]);
@@ -29,4 +32,6 @@ usuario = {
   nome:'',
   senha:''
 }
+
 }
+

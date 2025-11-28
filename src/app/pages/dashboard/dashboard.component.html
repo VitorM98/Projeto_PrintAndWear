@@ -1,86 +1,96 @@
-<header>
-    <nav>
-        <button id="btn-menu" aria-label="Abrir Menu" (click)="toggleMenu()">
-            <span class="linha"></span>
-            <span class="linha"></span>
-            <span class="linha"></span>
-        </button>
-        <div id="overlay" class="overlay"></div>
-        <div id="menuModal" class="modal">
-            <div class="modal-conteudo">
-                <img class="logoFord" src="ford.png" alt="">
-                <a href="/home">Home</a>
-                <a href="/dashboard">Dashboard</a>
+<div class="container">
+    <header>
+        <nav>
+            <button id="btn-menu" aria-label="Abrir Menu" (click)="toggleMenu()">
+                <span class="linha"></span>
+                <span class="linha"></span>
+                <span class="linha"></span>
+            </button>
+            <div id="overlay" class="overlay"></div>
+            <div id="menuModal" class="modal">
+                <div class="modal-conteudo">
+                    <img class="logoMarca" src="printandwearlogo.png" alt="">
+                    <a href="/home">Início</a>
+                    <a href="/tutorial">Tutorial</a>
+                    <a href="/pedido">Pedido</a>
+                    <a href="/dashboard">Relatório</a>
+                </div>
             </div>
+        </nav>
+        <div class="logOutContainer">
+            <a href=""><img (click)="logout()" class="logOut" src="desligar.png" alt=""></a>
         </div>
-    </nav>
-    <div class="logOutContainer">
-        <a href=""><img (click)="logout()" class="logOut" src="desligar.png" alt=""></a>
-    </div>
-</header>
-
-<h1 class="infoDashboard">Dashboard FORD</h1>
+    </header>
 
 
-<div class="cardsContainer">
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h1 class="card-title">Veículo</h1>
-                    <select class="selectCar" (change)="onVehicleChange($event)">
-            <option *ngFor="let v of vehicles" [value]="v.vehicle">{{ v.vehicle }}</option>
-        </select>
-        </div>
-    </div>
+<div class="containerDashboard">
 
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h1 class="card-title">Total de Vendas</h1>
-            <p class="card-text">{{ salesTotal }} Unid</p>
-        </div>
-    </div>
+    <div class="dashTitulo">
+  <h2>Vendas e Estoque do Mês</h2>
+  </div>
 
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h1 class="card-title">Conectados</h1>
-            <p class="card-text">{{ connectedTotal }} Unid</p>
-        </div>
-    </div>
+  <label class="tipoSelect" for="tipoSelect">Selecione o tipo:</label>
 
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h1 class="card-title">Update Software</h1>
-            <p class="card-text">{{ updateTotal }} Unid</p>
-        </div>
-    </div>
-</div>
+  <select id="tipoSelect" [(ngModel)]="tipoSelecionado" (change)="onSelectTipo()">
+    <option value="">-- Selecione --</option>
+    <option *ngFor="let t of tipos" [value]="t.value">
+      {{ t.label }}
+    </option>
+  </select>
 
-<img class="car-image" [src]="carImage" *ngIf="carImage">
-
-<footer class="footer-section">
-  <table class="vehicle-table">
+  <table *ngIf="tabelaDados.length > 0">
     <thead>
       <tr>
-        <th>Código - VIN</th>
-        <th>Odômetro</th>
-        <th>Nível de Combustível</th>
-        <th>Status</th>
-        <th>Lat.</th>
-        <th>Long.</th>
+        <th>Tamanho</th>
+        <th>Cor</th>
+        <th>Vendidos</th>
+        <th>Estoque</th>
       </tr>
     </thead>
+
     <tbody>
-      <tr>
-        <td class="vin-field-container" data-label="CÓDIGO - VIN">
-          <select class="vin-input-display" [formControl]="vinInput">
-            <option *ngFor="let vin of availableVins" [value]="vin">{{ vin }}</option>
-          </select>
-        </td>
-        <td data-label="ODÔMETRO">{{ vinData?.odometro }} km</td>
-        <td data-label="NÍVEL DE COMBUSTÍVEL">{{ vinData?.nivelCombustivel }}%</td>
-        <td data-label="STATUS">{{ vinData?.status }}</td>
-        <td data-label="LAT.">{{ vinData?.lat }}</td>
-        <td data-label="LONG.">{{ vinData?.long }}</td>
+      <tr *ngFor="let item of tabelaDados">
+        <td>{{ item.tamanho }}</td>
+        <td>{{ item.cor }}</td>
+        <td>{{ item.vendidos }}</td>
+        <td>{{ item.estoque }}</td>
       </tr>
     </tbody>
   </table>
-</footer>
+
+  <p *ngIf="!tabelaDados.length && !carregando">
+  </p>
+
+  <div *ngIf="tabelaDados.length > 0" class="card-resumo">
+  <h3>Resumo Total</h3>
+  <div class="resumo-item">
+    <p><strong>Estoque Total:</strong></p>
+    <p>{{ totalEstoque }}</p>
+  </div>
+  <div class="resumo-item">
+    <p><strong>Vendidos Total:</strong></p>
+    <p>{{ totalVendidos }}</p>
+  </div>
+  <div class="resumo-item">
+    <p><strong>Preço Fixo (unidade):</strong></p>
+    <p>R$ 50,00</p>
+  </div>
+  <div class="resumo-item total-vendido">
+    <p><strong>Valor Total Vendido:</strong></p>
+    <p>R$ {{ valorTotalVendidos | number:'1.2-2':'pt'}}</p>
+  </div>
+</div>
+
+</div>
+
+    <footer>
+        <div class="footerContainer">
+            <div class="footerSocialMedia">
+                <a href=""><img class="instagramFooter" src="instagram.png" alt=""></a>
+            </div>
+            <div class="footerCopyright">
+                <p>© 2025 Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+</div>

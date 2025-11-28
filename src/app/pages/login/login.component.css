@@ -1,4 +1,35 @@
+@import url('https://fonts.cdnfonts.com/css/donegal-one');
+
 /* ======== RESET ======== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #D2D2D2;
+    background-image:
+        repeating-linear-gradient(to right, transparent 0 100px,
+            #25283b22 100px 101px),
+        repeating-linear-gradient(to bottom, transparent 0 100px,
+            #25283b22 100px 101px);
+}
+
+body::before {
+    position: absolute;
+    width: min(1400px, 90vw);
+    top: 10%;
+    left: 50%;
+    height: 90%;
+    transform: translateX(-50%);
+    content: '';
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: top center;
+    pointer-events: none;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -7,37 +38,78 @@
 }
 
 /* LOGO */
-.logo {
-    margin-top: 10px;
-    margin-left: 65%;
+
+.logoImage {
+    width: 300px;
+    border-radius: 50%;
+    margin-left: 30%;
+    box-shadow: 0 0 15px 8px #464545;
 }
+
+/* texto principal */
+
+.textoPrincipal {
+    width: 500px;
+    margin-top: 20px;
+    /* Reduza a margem superior para dar mais espaço */
+    z-index: 2;
+    /* Garante que o texto fique acima do carrossel */
+    position: absolute;
+}
+
+.textoPrincipal h1,
+.textoPrincipal p {
+    color: #b9c0c4;
+    margin-left: 100px;
+    position: static;
+    top: 0;
+    margin-top: 4px;
+    font-family: 'Donegal One', sans-serif;
+}
+
+/* container */
 
 .container {
     display: flex;
-    margin-top: 10%;
-    background-color: white;
+    background-color: transparent;
+    background-image: url("../../../../public/bck1.jpg");
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
+/* left-side */
 .left-side {
-    width: 50%;
+    width: 10%;
+    height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
+    /* Remover align-items e justify-content aqui, pois o carrossel será absoluto */
+    flex-direction: column;
+    /* Mantido para o texto principal */
+    overflow: visible;
+    transform-style: preserve-3d;
+    position: relative;
+    /* CRUCIAL: Para posicionar o .carousel absolutamente dentro dele */
 }
 
-.car-image {
-    width: 70%;
-    opacity: 0.92;
+.rightSideContent {
+    position: relative;
+    z-index: 9999;
 }
 
 .right-side {
-    width: 50%;
+    width: 30%;
+    height: 100vh;
     background: white;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    margin-left: 25%;
+    background-color: rgba(125, 121, 121, 0.443);
+    padding: 5%;
+    box-shadow:
+        -5px 0px 5px 0 rgba(125, 121, 121, 0.443),
+        5px 0px 5px 0 rgba(125, 121, 121, 0.443);
 }
 
 .logo {
@@ -46,9 +118,155 @@
 }
 
 h2 {
-    color: #32a68a;
-    margin-bottom: 25px;
+    color: white;
+    margin-bottom: 5px;
     font-size: 24px;
+}
+
+p {
+    color: white;
+    margin-bottom: 5px;
+}
+
+
+/* SLIDER CARROSSEL */
+
+@import url('https://fonts.cdnfonts.com/css/ica-rubrik-black');
+@import url('https://fonts.cdnfonts.com/css/poppins');
+
+.banner {
+    width: 1500px;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    top: -1%;
+    margin-left: 100%;
+    margin-top: 420px;
+}
+
+.banner .slider {
+    position: absolute;
+    width: 200px;
+    height: 250px;
+    top: 10%;
+    left: calc(50% - 100px);
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    animation: autoRun 20s linear infinite;
+    z-index: 2;
+}
+
+@keyframes autoRun {
+    from {
+        transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
+    }
+
+    to {
+        transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);
+    }
+}
+
+.banner .slider .item {
+    position: absolute;
+    inset: 0 0 0 0;
+    transform:
+        rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(550px);
+}
+
+.banner .slider .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banner .content {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1400px, 100vw);
+    height: max-content;
+    padding-bottom: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+}
+
+.banner .content h1 {
+    font-family: 'ICA Rubrik';
+    font-size: 16em;
+    line-height: 1em;
+    color: #25283B;
+    position: relative;
+}
+
+.banner .content h1::after {
+    position: absolute;
+    inset: 0 0 0 0;
+    content: attr(data-content);
+    z-index: 2;
+    -webkit-text-stroke: 2px #d2d2d2;
+    color: transparent;
+}
+
+.banner .content .author {
+    font-family: Poppins;
+    text-align: right;
+    max-width: 200px;
+}
+
+.banner .content h2 {
+    font-size: 3em;
+}
+
+@media screen and (max-width: 1023px) {
+    .banner .slider {
+        width: 160px;
+        height: 200px;
+        left: calc(50% - 80px);
+    }
+
+    .banner .slider .item {
+        transform:
+            rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(300px);
+    }
+
+    .banner .content h1 {
+        text-align: center;
+        width: 100%;
+        text-shadow: 0 10px 20px #000;
+        font-size: 7em;
+    }
+
+    .banner .content .author {
+        color: #fff;
+        padding: 20px;
+        text-shadow: 0 10px 20px #000;
+        z-index: 2;
+        max-width: unset;
+        width: 100%;
+        text-align: center;
+        padding: 0 30px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .banner .slider {
+        width: 100px;
+        height: 150px;
+        left: calc(50% - 50px);
+    }
+
+    .banner .slider .item {
+        transform:
+            rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(180px);
+    }
+
+    .banner .content h1 {
+        font-size: 5em;
+    }
 }
 
 /* ======== NOVO: Linha para input + ícone ao lado ======== */
@@ -57,7 +275,8 @@ h2 {
     align-items: center;
     width: 406px;
     margin-bottom: 15px;
-    gap: 10px; /* Mantém espaçamento igual ao que já existia visualmente */
+    gap: 10px;
+    /* Mantém espaçamento igual ao que já existia visualmente */
 }
 
 .input-row1 {
@@ -65,7 +284,8 @@ h2 {
     align-items: center;
     width: 430px;
     margin-bottom: 15px;
-    gap: 10px; /* Mantém espaçamento igual ao que já existia visualmente */
+    gap: 10px;
+    /* Mantém espaçamento igual ao que já existia visualmente */
 }
 
 /* ======== INPUT ======== */
@@ -116,6 +336,71 @@ h2 {
     opacity: 0.8;
 }
 
+/*  LGPD */
+
+.lgpd-consent {
+    margin: 15px 0 5px 3px;
+    display: flex;
+    font-size: 0.9em;
+    color: white;
+}
+
+/* Estilo para o link "Termo de Uso LGPD" */
+.termos-link {
+    color: #007bff;
+    /* Cor azul de link */
+    text-decoration: underline;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.lgpd-consent-check {
+    margin-right: 2px;
+}
+
+/* Garante que o container LGPD seja o ponto de referência para o balão */
+.lgpd-consent {
+    position: relative;
+    /* Essencial para o posicionamento absoluto do balão */
+    /* Mantenha outros estilos de layout aqui */
+}
+
+/* Estilo do Balão de Aviso */
+.aviso-balao {
+    position: absolute;
+    /* Ajuste de posição: coloca o balão acima do centro do container LGPD */
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    /* Centraliza horizontalmente */
+
+    background-color: #ffc107;
+    /* Amarelo de aviso */
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8em;
+    white-space: nowrap;
+    /* Impede que o texto quebre linha */
+    z-index: 100;
+    /* Garante que fique acima de outros elementos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo do "Triângulo" que aponta para baixo (simula o balão de fala) */
+.aviso-balao::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    /* Posição para ficar na parte de baixo do balão */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 8px 8px 0;
+    border-style: solid;
+    /* Faz a cor do triângulo ser a mesma do fundo do balão */
+    border-color: #ffc107 transparent transparent transparent;
+}
+
 /* ======== SWITCH ======== */
 .auto-box {
     width: 330px;
@@ -123,7 +408,7 @@ h2 {
     align-items: center;
     margin: 10px 0 20px 95px;
     position: relative;
-    color: #555;
+    color: white;
     font-size: 14px;
 }
 
@@ -131,30 +416,36 @@ h2 {
     flex: 1;
 }
 
-.switch {
+.spanLogar {
+    margin-left: 110px;
+}
+
+.switch2 {
     position: relative;
     width: 40px;
     height: 20px;
     margin-right: 10px;
 }
 
-.switch input {
+.switch2 input {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-.slider {
+.slider2 {
     position: absolute;
     cursor: pointer;
-    top: 0; left: 0;
-    right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-color: #ccc;
     border-radius: 20px;
     transition: .3s;
 }
 
-.slider:before {
+.slider2:before {
     position: absolute;
     content: "";
     height: 16px;
@@ -166,11 +457,11 @@ h2 {
     transition: .3s;
 }
 
-input:checked + .slider {
+input:checked+.slider2 {
     background-color: #2f9d85;
 }
 
-input:checked + .slider:before {
+input:checked+.slider2:before {
     transform: translateX(20px);
 }
 
@@ -195,69 +486,385 @@ input:checked + .slider:before {
     background: #a4adb3;
 }
 
+/* footer */
+
+footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+.footerContainer {
+    align-items: center;
+    display: flex;
+}
+
+.footerCopyright {
+    margin-left: 40%;
+}
+
+.instagramFooter {
+    width: 70px;
+    transition: transform 0.3s ease;
+}
+
+.instagramFooter:hover {
+    transform: scale(1.2);
+}
+
 
 
 /* =======================
-   MEDIA QUERY (até 950px)
+   MEDIA QUERY
    ======================= */
-@media (max-width: 950px) {
+@media (max-width: 1668px) {
 
-    /* container vira coluna */
-    .container {
-        flex-direction: column;
-        margin-top: 40px;
-    }
 
-    /* lado esquerdo (imagem do carro) desaparece — evita quebrar o layout */
-    .left-side {
-        display: none;
-    }
-
-    /* lado direito vira 100% da tela */
-    .right-side {
+    footer {
         width: 100%;
-        padding: 20px;
-        border-left: none;
+        position: fixed;
+        bottom: 0;
     }
 
-    /* logo centralizada */
-    .logo {
-        margin: 20px auto;
+    .footerContainer {
+        align-items: center;
         display: flex;
+    }
+
+    .footerCopyright {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .instagramFooter {
+        width: 70px;
+        margin-left: 5px;
+    }
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    /* CORREÇÃO PRINCIPAL: Faz o container centralizar o conteúdo vertical e horizontalmente */
+    .container {
+        display: flex;
+        width: 100%;
+        /* Garante que o fundo ocupe toda a largura */
+        height: 100vh;
+        /* Garante que o fundo ocupe toda a altura */
+    }
+
+    /* Oculta o lado esquerdo e o carrossel */
+
+    .left-side {
+        width: 600px;
+        min-height: 100vh;
+        margin-top: -90px;
+    }
+
+    .banner {
+        max-width: 100%;
+        margin-left: 135%;
+        margin-right: auto;
+    }
+
+    .textoPrincipal {
+        width: 100%;
+        min-height: 100vh;
+        margin-top: 15%;
+    }
+
+    .textoPrincipal h1 {
+        width: 30%;
+    }
+
+
+    .logo {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .logoImage {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .rightSideContent {
+        width: 100%;
+        height: 100%;
+        align-items: center;
         justify-content: center;
     }
 
-    /* inputs ocupam a tela corretamente */
+    /* Centraliza o lado direito (box de login) */
+    .right-side {
+        min-width: 30%;
+        height: 100vh;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.7);
+        padding: 40px 20px;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Ajusta a largura dos elementos internos do right-side para serem responsivos */
     .input-row {
-        width: 90%;
-        gap: 8px;
+        width: 92%;
+        max-width: 350px;
     }
 
-     .input-row1 {
+    .input-row1 {
         width: 100%;
-        gap: 8px;
+        max-width: 375px;
     }
 
-    .input-box {
-        height: 36px;
-    }
-
-    .input-box input {
-        font-size: 16px;
-    }
-
-    /* botão 100% */
-    .btn {
-        width: 90%;
-        padding: 14px;
-        font-size: 16px;
-    }
-
-    /* auto-login ajustado */
+    /* Ajusta o box do auto-login */
     .auto-box {
-        width: 100%;
-        margin: 15px 0;
+        width: 70%;
+        max-width: 350px;
+        margin-left: 3px;
         justify-content: space-between;
+    }
+
+    .spanLogar {
         margin-left: 0;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .right-side h2 {
+        margin-left: 60px;
+    }
+}
+
+@media (max-width: 1500px) {
+    .left-side {
+        width: 600px;
+        min-height: 100vh;
+margin-top: -100px;
+    }
+
+    .banner {
+        max-width: 100%;
+        margin-left: 125%;
+        margin-right: auto;
+    }
+
+    .textoPrincipal {
+        margin-top: 100px;
+    }
+
+    .textoPrincipal h1 {
+        width: 30%;
+    }
+
+}
+
+@media (max-width: 1359px) {
+    .left-side {
+        width: 600px;
+        min-height: 100vh;
+margin-top: -100px;
+    }
+
+    .banner {
+        max-width: 100%;
+        margin-left: 115%;
+        margin-right: auto;
+    }
+
+}
+
+@media (max-width: 1300px) {
+    .left-side {
+        width: 600px;
+        min-height: 100vh;
+margin-top: -100px;
+    }
+
+    .banner {
+        max-width: 100%;
+        margin-left: 105%;
+        margin-right: auto;
+    }
+
+}
+
+@media (max-width: 1230px) {
+    .left-side {
+        width: 600px;
+        min-height: 100vh;
+margin-top: -100px;
+    }
+
+    .banner {
+        max-width: 100%;
+        margin-left: 100%;
+        margin-right: auto;
+    }
+
+}
+
+@media (max-width: 1200px) {
+    .left-side {
+        width: 600px;
+        min-height: 100vh;
+margin-top: -100px;
+    }
+
+    .banner {
+        max-width: 100%;
+        margin-left: 90%;
+        margin-right: auto;
+    }
+
+        footer {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+    }
+
+    .footerContainer {
+        align-items: center;
+        display: flex;
+    }
+
+    .footerCopyright {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .instagramFooter {
+        width: 70px;
+        margin-left: 5px;
+    }
+
+}
+
+
+
+@media (max-width: 1180px) {
+    .left-side {
+display: none;
+    }
+
+    .banner {
+        max-width: 100%;
+        margin-left: 80%;
+        margin-right: auto;
+    }
+
+    
+}
+
+
+
+
+@media (max-width: 450px) {
+
+
+    footer {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+    }
+
+    .footerContainer {
+        align-items: center;
+        display: flex;
+    }
+
+    .footerCopyright {
+        margin-left: 15%;
+    }
+
+    .instagramFooter {
+        width: 70px;
+        margin-left: 5px;
+    }
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100vh;
+    }
+
+    /* CORREÇÃO PRINCIPAL: Faz o container centralizar o conteúdo vertical e horizontalmente */
+    .container {
+        flex-direction: column;
+        width: 100%;
+        /* Garante que o fundo ocupe toda a largura */
+        height: 100vh;
+        /* Garante que o fundo ocupe toda a altura */
+    }
+
+    /* Oculta o lado esquerdo e o carrossel */
+    .left-side,
+    .banner {
+        display: none;
+        width: 0;
+    }
+
+    .logoImage {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .rightSideContent {
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Centraliza o lado direito (box de login) */
+    .right-side {
+        width: 100%;
+        height: 100vh;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.7);
+        padding: 40px 20px;
+        align-items: center;
+        margin-left: 0px;
+    }
+
+    /* Ajusta a largura dos elementos internos do right-side para serem responsivos */
+    .input-row {
+        width: 92%;
+        max-width: 350px;
+    }
+
+    .input-row1 {
+        width: 100%;
+        max-width: 375px;
+    }
+
+    /* Ajusta o box do auto-login */
+    .auto-box {
+        width: 70%;
+        max-width: 350px;
+        margin-left: 3px;
+        justify-content: space-between;
+    }
+
+    .spanLogar {
+        margin-left: 0;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .right-side h2 {
+        margin-left: 60px;
     }
 }

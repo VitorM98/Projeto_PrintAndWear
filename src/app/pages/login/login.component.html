@@ -1,52 +1,109 @@
+<div class="container">
 
-    <div class="logo">
-        <img src="ford.png" class="logo" alt="">
-    </div>
-
-    <div class="container">
-
-        <div class="left-side">
-            <img src="ranger.png" class="car-image" alt="">
+    <div class="left-side">
+        <div class="textoPrincipal">
+            <h1>Personalize agora mesmo!</h1>
+            <p>Crie camisas iradas utilizando Inteligência Artificial e a sua imaginação.</p>
+            <p>Enviamos agora mesmo para todo o Brasil.</p>
         </div>
 
-        <div class="right-side">
-
-            <h2>Boas-vindas</h2>
-
-            <form #loginForm="ngForm" (ngSubmit)="login()">
-
-                    <div class="input-row1">
-                        <div class="input-box">
-                            <img src="user.png" class="input-icon1">
-                            <input type="email" name="nome" [(ngModel)]="usuario.nome" placeholder="Insira seu e-mail">
-                        </div>
-                          <img src="informacoes.png" class="status-icon">
-                    </div>
-
-
-                <div class="input-row">
-                    <div class="input-box">
-                        <img src="trancar.png" class="input-icon2">
-                        <input type="password" name="senha" [(ngModel)]="usuario.senha"  placeholder="Insira sua senha">
-                    </div>
+        <div class="banner" style="--quantity: 10">
+            <div class="slider">
+                <div class="item" style="--position: 1">
+                    <img class="bannerImage" src="1.png" alt="Card Principal 1">
                 </div>
-
-                <div class="auto-box">
-                    <span>Logar automaticamente</span>
-                    <label class="switch">
-                        <input type="checkbox">
-                        <span class="slider"></span>
-                    </label>
-                    <img src="informacoes.png" class="status-icon-small">
+                <div class="item" style="--position: 2">
+                    <img class="bannerImage" src="2.png" alt="Card Lateral 2">
                 </div>
-
-                <button type="submit" class="btn">Entrar</button>
-
-
-            </form>
-
-
+                <div class="item" style="--position: 3">
+                    <img class="bannerImage" src="3.png" alt="Card Lateral 3">
+                </div>
+                <div class="item" style="--position: 4">
+                    <img class="bannerImage" src="4.png" alt="Card Lateral 4">
+                </div>
+                <div class="item" style="--position: 5">
+                    <img class="bannerImage" src="5.png" alt="Card Lateral 5">
+                </div>
+                <div class="item" style="--position: 6">
+                    <img class="bannerImage" src="6.png" alt="Card Lateral 6">
+                </div>
+                <div class="item" style="--position: 7">
+                    <img class="bannerImage" src="1.png" alt="Card Lateral 7">
+                </div>
+                <div class="item" style="--position: 8">
+                    <img class="bannerImage" src="4.png" alt="Card Lateral 8">
+                </div>
+                <div class="item" style="--position: 9">
+                    <img class="bannerImage" src="3.png" alt="Card Lateral 9">
+                </div>
+                <div class="item" style="--position: 10">
+                    <img class="bannerImage" src="5.png" alt="Card Lateral 10">
+                </div>
+                
+            </div>
         </div>
-
     </div>
 
+    <div class="right-side">
+
+        <div class="rightSideContent">
+        <div class="logo">
+            <img class="logoImage" src="printandwearlogo.png" alt="">
+        </div>
+
+        <h2>Seja bem-vindo(a)!</h2>
+        <p>Realize o login para ter acesso ao conteúdo do site.</p>
+
+        <form #loginForm="ngForm" (ngSubmit)="login()">
+
+            <div class="input-row1">
+                <div class="input-box">
+                    <img src="user.png" class="input-icon1">
+                    <input type="email" name="nome" [(ngModel)]="usuario.nome" placeholder="Insira seu e-mail">
+                </div>
+                <img src="informacoes.png" class="status-icon">
+            </div>
+
+
+            <div class="input-row">
+                <div class="input-box">
+                    <img src="trancar.png" class="input-icon2">
+                    <input type="password" name="senha" [(ngModel)]="usuario.senha" placeholder="Insira sua senha">
+                </div>
+            </div>
+
+            <div class="auto-box">
+                <span class="spanLogar">Logar automaticamente</span>
+                <label class="switch2">
+                    <input type="checkbox">
+                    <span class="slider2"></span>
+                </label>
+                <img src="informacoes.png" class="status-icon-small">
+            </div>
+
+            <div class="lgpd-consent">
+                <input name="aceite-termos" [(ngModel)]="termoAceito" type="checkbox" id="aceitoTermos" class="lgpd-consent-check">
+
+                <label for="aceitoTermos" class="lgpd-text-wrapper">
+                    Li e concordo com o<a href="#" class="termos-link">LGPD</a> e com o<a href="#" class="termos-link">Termo de Acesso</a>.
+                </label>
+            </div>
+            <button type="submit" class="btn" [disabled]="!termoAceito">Entrar</button>
+
+        </form>
+
+
+    </div>
+</div>
+
+            <footer>
+                <div class="footerContainer">
+                    <div class="footerSocialMedia">
+                <a href=""><img class="instagramFooter" src="instagram.png" alt=""></a>
+                </div>
+                <div class="footerCopyright">
+                    <p>© 2025 Todos os direitos reservados.</p>
+                </div>
+                </div>
+            </footer>
+</div>

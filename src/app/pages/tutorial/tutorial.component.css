@@ -146,6 +146,12 @@ header {
 
 /* carrossel */
 
+/* Adicionado o cursor: pointer ao elemento principal */
+.carrossel {
+    /* Garante que o cursor mude para a mãozinha */
+    cursor: pointer; 
+}
+
 .carousel-wrapper {
     position: relative;
     width: 100%;
@@ -172,9 +178,9 @@ header {
     object-fit: cover;
     border-radius: 10px;
     box-shadow: 0 14px 8px rgba(15, 14, 14, 0.3);
-display: block;
-margin-left: auto;
-margin-right:auto ;
+    display: block;
+    margin-left: auto;
+    margin-right:auto ;
 }
 
 .caption {
@@ -196,12 +202,12 @@ margin-right:auto ;
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    cursor: pointer;
+    cursor: pointer; 
     transition: 0.2s ease;
 }
 
 .nav img{
-width: 128px;
+    width: 128px;
 }
 
 .nav:hover {
@@ -322,8 +328,8 @@ width: 80%;
 
       footer {
 width: 100%;
-position: static;
-bottom: 0;
+    position: fixed;
+    bottom: 0;
 }
 
 .footerContainer {
@@ -402,211 +408,4 @@ margin-left: 15%;
         transform: rotate(-45deg) translate(5px, -5px);
     }
 
-}
-
-
-/* dashboard */
-
-.containerDashboard {
-  width: 800px;
-  margin: 30px auto;
-  font-family: Arial;
-}
-
-.containerDashboard h2{
-    color: white;
-    font-size: 50px;
-    margin-left: 5%;
-        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
-}
-
-.tipoSelect{
-    color: white;
-    margin-right: 1%;
-}
-
-select {
-  margin: 10px 0 20px 0;
-  padding: 10px;
-  font-size: 16px;
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);;
-    border: 1px solid black;
-    border-radius: 3px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 15px;
-  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
-  border: 1.9px solid black;
-}
-
-table th, table td {
-  border: 1.5px solid #ccc;
-  padding: 8px;
-  text-align: center;
-  font-weight: bolder;
-  background: rgba(128, 128, 128, 0.5);
-}
-
-table th {
-  background-color: rgba(212, 207, 207, 0.5);
-}
-
-/* ESTILOS PARA O CARD DE RESUMO */
-.card-resumo {
-    background-color: rgba(212, 207, 207, 0.5);
-    border: 2px solid black;
-    border-radius: 8px; /* Cantos levemente arredondados */
-    padding: 20px;
-    margin-top: 20px;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4); /* Sombra mais destacada */
-    width: 100%;
-    max-width: 400px; /* Limita a largura do card */
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.card-resumo h3 {
-    text-align: center;
-    color: #333;
-    margin-top: 0;
-    margin-bottom: 15px;
-    border-bottom: 2px solid #0e0606;
-    padding-bottom: 10px;
-}
-
-.resumo-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px dashed #0e0606;
-}
-
-.resumo-item:last-child {
-    border-bottom: none;
-}
-
-.resumo-item p {
-    margin: 0;
-    font-size: 16px;
-}
-
-.total-vendido {
-    font-size: 18px;
-    font-weight: bold;
-    color: #078316d7; /* Cor de destaque para o total vendido */
-    border-top: 2px solid #0e0606;
-    margin-top: 10px;
-    padding-top: 10px;
-}
-
-/* ============================
-    RESPONSIVO - ATÉ 950px
-============================ */
-@media (max-width: 950px) {
-
-  .containerDashboard {
-    width: 90%;
-    margin: 20px auto;
-  }
-
-  .containerDashboard h2 {
-    font-size: 38px;
-    text-align: center;
-    margin-left: 0;
-  }
-
-  select {
-    width: 100%;
-    font-size: 15px;
-  }
-
-  table th, table td {
-    padding: 6px;
-    font-size: 14px;
-  }
-
-    .card-resumo{
-width: 100%;
-height: 50%;
-  }
-}
-
-
-/* ============================
-    RESPONSIVO - ATÉ 600px
-============================ */
-@media (max-width: 600px) {
-
-  .containerDashboard h2 {
-    font-size: 32px;
-  }
-
-  .tipoSelect {
-    font-size: 15px;
-  }
-
-  select {
-    padding: 8px;
-    font-size: 14px;
-  }
-
-  table th, table td {
-    padding: 5px;
-    font-size: 13px;
-  }
-
-  .resumo-item p {
-    font-size: 14px;
-  }
-
-  .total-vendido {
-    font-size: 16px;
-  }
-
-    .card-resumo{
-width: 80%;
-height: 50%;
-  }
-}
-
-
-/* ============================
-    RESPONSIVO - ATÉ 430px
-============================ */
-@media (max-width: 430px) {
-
-  .containerDashboard h2 {
-    font-size: 26px;
-  }
-
-  select {
-    padding: 7px;
-    font-size: 13px;
-  }
-
-  table {
-    font-size: 12px;
-  }
-
-  table th, table td {
-    padding: 4px;
-  }
-
-  .resumo-item {
-    flex-direction: column;
-    text-align: left;
-    gap: 4px;
-  }
-
-  .resumo-item p {
-    font-size: 13px;
-  }
-
-  .card-resumo{
-width: 80%;
-height: 50%;
-  }
 }

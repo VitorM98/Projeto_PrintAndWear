@@ -1,33 +1,83 @@
-<header>
+<div class="container">
+  <header>
     <nav>
-        <button id="btn-menu" aria-label="Abrir Menu" (click)="toggleMenu()">
-            <span class="linha"></span>
-            <span class="linha"></span>
-            <span class="linha"></span>
-        </button>
-        <div id="overlay" class="overlay"></div>
-        <div id="menuModal" class="modal">
-            <div class="modal-conteudo">
-                <img class="logoFord" src="ford.png" alt="">
-                <a href="/home">Home</a>
-                <a href="/dashboard">Dashboard</a>
-            </div>
+      <button id="btn-menu" aria-label="Abrir Menu" (click)="toggleMenu()">
+        <span class="linha"></span>
+        <span class="linha"></span>
+        <span class="linha"></span>
+      </button>
+      <div id="overlay" class="overlay"></div>
+      <div id="menuModal" class="modal">
+        <div class="modal-conteudo">
+          <img class="logoMarca" src="printandwearlogo.png" alt="">
+          <a href="/home">Início</a>
+          <a href="/tutorial">Tutorial</a>
+          <a href="/pedido">Pedido</a>
+          <a href="/dashboard">Relatório</a>
         </div>
+      </div>
     </nav>
     <div class="logOutContainer">
-        <a href=""><img (click)="logout()" class="logOut" src="desligar.png" alt=""></a>
+      <a href=""><img (click)="logout()" class="logOut" src="desligar.png" alt=""></a>
     </div>
-</header>
+  </header>
 
-<body>
-    <script src="script.js"></script>
 
-    <div class="caixa-boas-vindas" id="boasVindas" >
-        <button class="fechar" (click)="fecharBoasVindas()">×</button>
-        <h1>Sistema de dados FORD</h1>
-        <p>Seja bem vindo(a)!</p>
+  <script src="script.js"></script>
+
+  <div class="caixa-boas-vindas" id="boasVindas">
+    <button class="fechar" (click)="fecharBoasVindas()">×</button>
+    <div class="textoCaixa">
+      <h1>SEJA BEM-VINDO(A)!</h1>
+      <p>Comece agora mesmo a personalizar a sua camisa.</p>
+      <p>Acesse a página tutorial na aba ao lado ou <a href="/tutorial">clicando aqui</a> e saiba como pedir pra IA
+        personalizar a sua camisa e realizar a sua compra.</p>
     </div>
-</body>
+    <img class="imagemCard" src="camisa.gif" alt="">
+  </div>
 
 
+  <!-- CONTAINER PRINCIPAL DO CHAT -->
+  <div class="chat-wrapper">
 
+    <!-- ÁREA DAS MENSAGENS -->
+    <div class="chat-box">
+      <div class="message" *ngFor="let msg of messages" [ngClass]="msg.role === 'user' ? 'user-msg' : 'bot-msg'">
+        <!-- Texto -->
+        <div class="text" *ngIf="msg.content">
+          {{ msg.content }}
+        </div>
+
+        <!-- Imagem enviada -->
+        <img *ngIf="msg.image" [src]="msg.image" class="chat-image" alt="Imagem enviada">
+      </div>
+    </div>
+
+    <!-- ÁREA DE DIGITAÇÃO -->
+    <div class="input-area">
+
+      <!-- textarea -->
+      <textarea placeholder="Digite sua mensagem..." [(ngModel)]="userInput" (keyup.enter)="sendMessage()"
+        class="msg-textarea"></textarea>
+
+      <label for="fileInput" class="file-btn">📎</label>
+      <input id="fileInput" type="file" accept="image/*" (change)="sendImage($event)" hidden>
+    </div>
+    <button class="send-btn" (click)="sendMessage()">Enviar</button>
+  </div>
+
+  <footer>
+    <div class="footerContainer">
+      <div class="footerSocialMedia">
+        <a href=""><img class="instagramFooter" src="instagram.png" alt=""></a>
+      </div>
+      <div class="footerCopyright">
+        <p>© 2025 Todos os direitos reservados.</p>
+      </div>
+      <div class="contato">
+        <app-fab-contact></app-fab-contact>
+      </div>
+    </div>
+  </footer>
+
+</div>

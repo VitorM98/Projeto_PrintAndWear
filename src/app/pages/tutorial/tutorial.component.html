@@ -1,0 +1,72 @@
+<div class="container">
+    <header>
+        <nav>
+            <button id="btn-menu" aria-label="Abrir Menu" (click)="toggleMenu()">
+                <span class="linha"></span>
+                <span class="linha"></span>
+                <span class="linha"></span>
+            </button>
+            <div id="overlay" class="overlay"></div>
+            <div id="menuModal" class="modal">
+                <div class="modal-conteudo">
+                    <img class="logoMarca" src="printandwearlogo.png" alt="">
+                    <a href="/home">Início</a>
+                    <a href="/tutorial">Tutorial</a>
+                    <a href="/pedido">Pedido</a>
+                    <a href="/dashboard">Relatório</a>
+                </div>
+            </div>
+        </nav>
+        <div class="logOutContainer">
+            <a href=""><img (click)="logout()" class="logOut" src="desligar.png" alt=""></a>
+        </div>
+    </header>
+
+<div class="carrossel" (mousedown)="pauseCarousel()">
+
+    <div class="carousel-wrapper">
+
+        <button class="nav prev" 
+                (mousedown)="pauseCarousel()" 
+                (mouseup)="startCarousel()" 
+                (click)="prev()">
+            <img src="nextbutton.png" alt="">
+        </button>
+
+        <div class="carousel">
+            <div class="slide">
+                <p class="caption">{{ slides[currentIndex].text }}</p>
+                <img [src]="slides[currentIndex].image" alt="slide">
+            </div>
+        </div>
+
+        <button class="nav next" 
+                (mousedown)="pauseCarousel()" 
+                (mouseup)="startCarousel()" 
+                (click)="next()">
+            <img src="prevbutton.png" alt="">
+        </button>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+    <footer>
+        <div class="footerContainer">
+            <div class="footerSocialMedia">
+                <a href=""><img class="instagramFooter" src="instagram.png" alt=""></a>
+            </div>
+            <div class="footerCopyright">
+                <p>© 2025 Todos os direitos reservados.</p>
+            </div>
+                  <div class="contato">
+        <app-fab-contact></app-fab-contact>
+      </div>
+        </div>
+    </footer>
+</div>

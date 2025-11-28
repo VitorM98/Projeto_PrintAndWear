@@ -1,29 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { NgFor, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs'; // Adicionado 'of' para compatibilidade (embora não esteja sendo usado diretamente aqui)
-
-// Interface para estruturar os dados do VIN (Boa prática)
-interface VinData {
-  id: number;
-  odometro: number;
-  nivelCombustivel: number;
-  status: string;
-  lat: number;
-  long: number;
-}
-
+import { CamisasService } from '../../services/camisa.service';
+import { FormsModule } from '@angular/forms';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [NgFor, NgIf, ReactiveFormsModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule, NgFor, NgIf, FormsModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit {
   toggleMenu(): void {
     const menu = document.getElementById('menuModal');
     const btn = document.getElementById('btn-menu');
@@ -34,107 +22,99 @@ export class DashboardComponent implements OnInit{
     overlay?.classList.toggle('ativo');
   }
 
-  vehicles: any[] = [];
-  selectedVehicle: any = null;
-
-  salesTotal: number = 0;
-  connectedTotal: number = 0;
-  updateTotal: number = 0;
-
-  carImage: string = '';
-
-  availableVins: string[] = [
-    "2FRHDUYS2Y63NHD22454",
-    "2RFAASDY54E4HDU34874",
-    "2FRHDUYS2Y63NHD22455",
-    "2RFAASDY54E4HDU34875",
-    "2FRHDUYS2Y63NHD22654",
-    "2FRHDUYS2Y63NHD22854"
-  ];
-  
-  // Inicializa o FormControl com o primeiro VIN para carregar os dados
-  vinInput = new FormControl(this.availableVins.length > 0 ? this.availableVins[0] : '');
-  vinData: VinData | null = null; 
-
-  constructor(private authService:AuthService, private http: HttpClient){}
-
-  ngOnInit(): void {
-    this.loadVehicles();
-
-    // Carrega os dados do VIN inicial (o primeiro da lista)
-    if (this.availableVins.length > 0) {
-      this.loadVinData(this.availableVins[0]);
-    }
-    
-    // Assina as mudanças no seletor/campo VIN
-    this.vinInput.valueChanges.subscribe(vin => {
-      // Ajuste para carregar dados assim que o VIN mudar
-      if (vin && vin.length > 5) {
-        this.loadVinData(vin);
-      } else {
-        this.vinData = null;
-      }
-    });
-  }
-
-  logout():void{
+  constructor(private authService: AuthService, private http: HttpClient, private camisasService: CamisasService) { }
+  logout(): void {
     this.authService.logout();
   }
 
-  loadVehicles() {
-    this.http.get<any>('http://localhost:3001/vehicles').subscribe({
-      next: (res) => {
-        this.vehicles = res.vehicles;
+  // dashboard
 
-        // Se existe pelo menos um veículo
-        if (this.vehicles.length > 0) {
+  tipos = [
+    { label: 'Camisa Masculina', value: 'masculino' },
+    { label: 'Camisa Feminina', value: 'feminino' }
+  ];
 
-          const first = this.vehicles[0];
-          this.selectedVehicle = first.vehicle;
+  tipoSelecionado = '';
+  tabelaDados: any[] = [];
+  dadosApi: any = {};
+  carregando = true;
 
-          // Carrega automaticamente os dados do primeiro item
-          this.fillVehicleData(first.vehicle);
-        }
+  // PROPRIEDADES DE RESUMO
+  totalEstoque: number = 0;
+  totalVendidos: number = 0;
+  precoFixo: number = 50.00;
+  valorTotalVendidos: number = 0; // Corrigido para plural
+  // FIM PROPRIEDADES DE RESUMO
+
+
+  ngOnInit(): void {
+    console.log("Dashboard carregou! (ngOnInit)");
+
+    this.camisasService.getAll().subscribe({
+      next: (res: any) => {
+        console.log("API respondeu:", res);
+        this.dadosApi = res;
+        this.carregando = false;
       },
-      error: () => console.error('Erro ao carregar veículos!') // Usando console.error em vez de alert
-    });
-  }
-
-  fillVehicleData(vehicleName: string) {
-    const v = this.vehicles.find(x => x.vehicle === vehicleName);
-    if (!v) return;
-
-    this.salesTotal = v.volumetotal;
-    this.connectedTotal = v.connected;
-    this.updateTotal = v.softwareUpdates;
-    this.carImage = v.img;
-  }
-
-  onVehicleChange(event: Event) {
-    const value = (event.target as HTMLSelectElement).value;
-    this.fillVehicleData(value);
-  }
-  
-  //  tipado para VinData
-  loadVinData(vin: string) {
-    this.http.post<VinData>('http://localhost:3001/vehicleData', { vin }).subscribe({
-      next: (res) => this.vinData = res,
-      error: () => {
-        console.error('VIN não encontrado ou erro de API.');
-        this.vinData = null;
+      error: (err: any) => {
+        console.error("Erro na API:", err);
       }
     });
   }
-  
-  // Função auxiliar para formatar odômetro
-  formatOdometro(value: number | undefined): string {
-    if (value === undefined || value === null) return '---';
-    return `${value.toLocaleString('pt-BR')} Km`;
+
+  onSelectTipo(): void {
+    if (!this.tipoSelecionado) {
+      this.tabelaDados = [];
+      this.calcularTotais(); // Reseta os totais quando a seleção é limpa
+      return;
+    }
+
+    const dadosTipo = this.dadosApi[this.tipoSelecionado];
+    const temp: any[] = [];
+
+    // Popula a tabelaDados
+    for (let tamanho in dadosTipo) {
+      for (let cor in dadosTipo[tamanho]) {
+        const item = dadosTipo[tamanho][cor];
+        temp.push({
+          tamanho,
+          cor,
+          vendidos: item.vendidos,
+          estoque: item.estoque
+        });
+      }
+    }
+
+    this.tabelaDados = temp;
+    this.calcularTotais(); // Calcula os totais após a atualização da tabela
   }
 
-  // Função auxiliar para formatar Nível de Combustível
-  formatFuelLevel(value: number | undefined): string {
-    if (value === undefined || value === null) return '---';
-    return `${value} %`;
+  // MÉTODO PARA CALCULAR TOTAIS
+  calcularTotais(): void {
+    this.totalEstoque = 0;
+    this.totalVendidos = 0;
+
+    // Soma os valores de vendidos e estoque da tabelaDados
+    for (const item of this.tabelaDados) {
+      this.totalEstoque += item.estoque;
+      this.totalVendidos += item.vendidos;
+    }
+
+    // Calcula o valor total vendido (Quantidade * Preço Fixo)
+    this.valorTotalVendidos = this.totalVendidos * this.precoFixo;
+  }
+  
+  /**
+   * Formata o valor numérico como Real Brasileiro (R$).
+   * Usa Intl.NumberFormat para garantir a formatação correta sem depender da
+   * configuração global do LOCALE_ID do Angular.
+   */
+  formatarMoeda(valor: number): string {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(valor);
   }
 }

@@ -1,0 +1,16 @@
+.fab-contact-button {
+  /* Fixa o botão na tela, independente da rolagem */
+  position: fixed; 
+  /* Distância da parte inferior da tela */
+  bottom: 20px;    
+  /* Distância do lado direito da tela */
+  right: 20px;     
+  /* Garante que o botão fique por cima de todo o conteúdo */
+  z-index: 1000;   
+}
+.whats-icon {
+  font-size: 28px !important;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
