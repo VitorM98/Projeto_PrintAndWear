@@ -316,12 +316,10 @@ width: 80%;
 }
 
 
-      footer {
-width: 100%;
-position: absolute;
-bottom: 0;
-}
-
+  footer {
+    width: 100%;
+    position: relative; 
+  }
 .footerContainer {
     align-items: center;
     display: flex;
@@ -813,4 +811,9 @@ display: none;
     .finalizar-btn {
         width: 100%;
     }
+
+    footer {
+    width: 100%;
+    position: relative; 
+  }
 }

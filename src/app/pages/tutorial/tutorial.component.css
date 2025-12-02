@@ -160,7 +160,7 @@ border-radius: 50%;
 
 .carousel {
     width: 900px;
-    height: 700px;
+    height: 73vh;
     background: transparent;
     padding: 10px;
     border-radius: 12px;
@@ -219,7 +219,6 @@ footer {
     width: 100%;
     margin-top: 4.9%;
     position: relative;
-    bottom: 0;
     background-color: rgba(128, 128, 128, 0.5);
     box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.2);
 }
@@ -246,7 +245,8 @@ footer {
 @media screen and (max-width: 1250px){
 
 .carousel{
-    width: 800px;
+    width: 700px;
+    height: 100vh;
 }
 
 .logOut{
@@ -255,14 +255,17 @@ footer {
 
 footer{
         width: 100%;
-    position: fixed;
-    bottom: 0;
+    position: relative;
 }
 
 }
 
 
 @media screen and (max-width: 1000px){
+
+    .carrossel{
+        width: 100%;
+    }
 
 .carousel{
     width: 100%;
@@ -287,8 +290,7 @@ footer{
 
 footer{
     width: 100%;
-    position: fixed;
-    bottom: 0;
+    position: relative;
 }
 
 .footerCopyright{
@@ -299,7 +301,7 @@ footer{
 }
 
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 750px) {
 
     body {
         background-size: contain;
@@ -321,6 +323,10 @@ footer{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.carrossel{
+    min-height: 79vh;
 }
 
 .carousel {
@@ -380,8 +386,8 @@ width: 80%;
 
       footer {
 width: 100%;
-    position: fixed;
-    bottom: 0;
+    position: relative;
+
 }
 
 .footerContainer {
