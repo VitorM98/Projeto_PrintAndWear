@@ -2,11 +2,12 @@
   /* Fixa o botão na tela, independente da rolagem */
   position: fixed; 
   /* Distância da parte inferior da tela */
-  bottom: 20px;    
+  bottom: 10px;    
   /* Distância do lado direito da tela */
-  right: 20px;     
+  right: 10px;     
   /* Garante que o botão fique por cima de todo o conteúdo */
-  z-index: 1000;   
+  z-index: 1000;
+
 }
 .whats-icon {
   font-size: 28px !important;

@@ -19,23 +19,24 @@ header {
 }
 
 .logOutContainer {
-    margin-left: 93%;
+    margin-left: auto;
+    margin-right: 3%;
     margin-top: 15px;
 }
 
 .logOut {
-    width: 20px;
+    width: 48px;
     transition: transform 0.3s ease;
 }
 
 .logOut:hover {
     transform: scale(1.2);
-    /* Opcional: Garante que o cursor mude para indicar interatividade */
     cursor: pointer;
 }
 
 .logoMarca {
-    width: 200px;
+    width: 100%;
+border-radius: 50%;
 }
 
 .imagemCard {
@@ -77,7 +78,6 @@ header {
     position: fixed;
     top: 0;
     left: -250px;
-    /* escondido inicialmente */
     width: 250px;
     height: 100%;
     background-color: white;
@@ -133,10 +133,8 @@ header {
     width: 100%;
     height: 100%;
     background-color: rgba(128, 128, 128, 0.5);
-    /* cinza semi-transparente */
     z-index: 999;
     display: none;
-    /* escondido por padrão */
 }
 
 /* Quando o menu está ativo, mostra o overlay */
@@ -217,6 +215,8 @@ footer {
     margin-top: 4.9%;
     position: fixed;
     bottom: 0;
+    background-color: rgba(128, 128, 128, 0.5);
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.2);
 }
 
 .footerContainer {
@@ -260,9 +260,7 @@ footer {
     margin: auto;
     display: flex;
     align-items: center;
-    /* centraliza os botões verticalmente */
     justify-content: center;
-    /* espaço entre botões e carrossel */
 }
 
 .carousel {
@@ -322,7 +320,7 @@ width: 80%;
 
       footer {
 width: 100%;
-position: static;
+position: absolute;
 bottom: 0;
 }
 
@@ -348,7 +346,7 @@ margin-left: 15%;
     }
 
     .logOut {
-        width: 18px;
+        width: 75%;
     }
 
     #btn-menu {
@@ -458,12 +456,12 @@ table th {
 .card-resumo {
     background-color: rgba(212, 207, 207, 0.5);
     border: 2px solid black;
-    border-radius: 8px; /* Cantos levemente arredondados */
+    border-radius: 8px; 
     padding: 20px;
     margin-top: 20px;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4); /* Sombra mais destacada */
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4); 
     width: 100%;
-    max-width: 400px; /* Limita a largura do card */
+    max-width: 400px; 
     margin-left: auto;
     margin-right: auto;
 }
@@ -496,7 +494,7 @@ table th {
 .total-vendido {
     font-size: 18px;
     font-weight: bold;
-    color: #078316d7; /* Cor de destaque para o total vendido */
+    color: #078316d7; 
     border-top: 2px solid #0e0606;
     margin-top: 10px;
     padding-top: 10px;
@@ -531,6 +529,11 @@ table th {
     .card-resumo{
 width: 100%;
 height: 50%;
+  }
+
+  footer{
+margin-bottom: auto;
+position: absolute;
   }
 }
 
@@ -570,6 +573,11 @@ height: 50%;
 width: 80%;
 height: 50%;
   }
+
+    footer{
+margin-bottom: auto;
+position: absolute;
+  }
 }
 
 
@@ -608,5 +616,14 @@ height: 50%;
   .card-resumo{
 width: 80%;
 height: 50%;
+  }
+
+  .logOut{
+    width: 30px;
+  }
+
+    footer{
+margin-bottom: auto;
+position: absolute;
   }
 }

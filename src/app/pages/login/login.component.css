@@ -51,9 +51,7 @@ body::before {
 .textoPrincipal {
     width: 500px;
     margin-top: 20px;
-    /* Reduza a margem superior para dar mais espaço */
     z-index: 2;
-    /* Garante que o texto fique acima do carrossel */
     position: absolute;
 }
 
@@ -84,13 +82,10 @@ body::before {
     width: 10%;
     height: 100vh;
     display: flex;
-    /* Remover align-items e justify-content aqui, pois o carrossel será absoluto */
     flex-direction: column;
-    /* Mantido para o texto principal */
     overflow: visible;
     transform-style: preserve-3d;
     position: relative;
-    /* CRUCIAL: Para posicionar o .carousel absolutamente dentro dele */
 }
 
 .rightSideContent {
@@ -269,14 +264,13 @@ p {
     }
 }
 
-/* ======== NOVO: Linha para input + ícone ao lado ======== */
+/* Linha para input + ícone ao lado  */
 .input-row {
     display: flex;
     align-items: center;
     width: 406px;
     margin-bottom: 15px;
     gap: 10px;
-    /* Mantém espaçamento igual ao que já existia visualmente */
 }
 
 .input-row1 {
@@ -285,7 +279,6 @@ p {
     width: 430px;
     margin-bottom: 15px;
     gap: 10px;
-    /* Mantém espaçamento igual ao que já existia visualmente */
 }
 
 /* ======== INPUT ======== */
@@ -348,7 +341,6 @@ p {
 /* Estilo para o link "Termo de Uso LGPD" */
 .termos-link {
     color: #007bff;
-    /* Cor azul de link */
     text-decoration: underline;
     cursor: pointer;
     margin-left: 5px;
@@ -361,43 +353,33 @@ p {
 /* Garante que o container LGPD seja o ponto de referência para o balão */
 .lgpd-consent {
     position: relative;
-    /* Essencial para o posicionamento absoluto do balão */
-    /* Mantenha outros estilos de layout aqui */
 }
 
 /* Estilo do Balão de Aviso */
 .aviso-balao {
     position: absolute;
-    /* Ajuste de posição: coloca o balão acima do centro do container LGPD */
     top: -40px;
     left: 50%;
     transform: translateX(-50%);
-    /* Centraliza horizontalmente */
-
     background-color: #ffc107;
-    /* Amarelo de aviso */
     color: #333;
     padding: 5px 10px;
     border-radius: 5px;
     font-size: 0.8em;
     white-space: nowrap;
-    /* Impede que o texto quebre linha */
     z-index: 100;
-    /* Garante que fique acima de outros elementos */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilo do "Triângulo" que aponta para baixo (simula o balão de fala) */
+
 .aviso-balao::after {
     content: '';
     position: absolute;
     bottom: -8px;
-    /* Posição para ficar na parte de baixo do balão */
     left: 50%;
     transform: translateX(-50%);
     border-width: 8px 8px 0;
     border-style: solid;
-    /* Faz a cor do triângulo ser a mesma do fundo do balão */
     border-color: #ffc107 transparent transparent transparent;
 }
 
@@ -489,9 +471,12 @@ input:checked+.slider2:before {
 /* footer */
 
 footer {
-    width: 100%;
-    position: fixed;
-    bottom: 0;
+width: 100%;
+margin-top: 3.5%;
+background-color: rgba(128, 128, 128, 0.5);
+box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.2);
+position: absolute;
+bottom: 0;
 }
 
 .footerContainer {
@@ -522,7 +507,7 @@ footer {
 
     footer {
         width: 100%;
-        position: fixed;
+        position: absolute;
         bottom: 0;
     }
 
@@ -548,16 +533,12 @@ footer {
         width: 100%;
     }
 
-    /* CORREÇÃO PRINCIPAL: Faz o container centralizar o conteúdo vertical e horizontalmente */
     .container {
         display: flex;
         width: 100%;
-        /* Garante que o fundo ocupe toda a largura */
         height: 100vh;
-        /* Garante que o fundo ocupe toda a altura */
     }
 
-    /* Oculta o lado esquerdo e o carrossel */
 
     .left-side {
         width: 600px;
@@ -600,7 +581,6 @@ footer {
         justify-content: center;
     }
 
-    /* Centraliza o lado direito (box de login) */
     .right-side {
         min-width: 30%;
         height: 100vh;
@@ -611,7 +591,6 @@ footer {
         margin-right: auto;
     }
 
-    /* Ajusta a largura dos elementos internos do right-side para serem responsivos */
     .input-row {
         width: 92%;
         max-width: 350px;
@@ -622,7 +601,7 @@ footer {
         max-width: 375px;
     }
 
-    /* Ajusta o box do auto-login */
+
     .auto-box {
         width: 70%;
         max-width: 350px;
@@ -725,9 +704,9 @@ margin-top: -100px;
         margin-right: auto;
     }
 
-        footer {
+    footer {
         width: 100%;
-        position: fixed;
+        position: absolute;
         bottom: 0;
     }
 
@@ -761,10 +740,34 @@ display: none;
         margin-right: auto;
     }
 
-    
+        .banner {
+        max-width: 100%;
+        margin-left: 80%;
+        margin-right: auto;
+    }
+
+    .right-side{
+        width: 50%;
+        align-items: center;
+    }
+
+    footer {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+    }
 }
 
+@media (max-width: 900px) {
 
+
+    footer {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+    }
+
+}
 
 
 @media (max-width: 450px) {
@@ -772,7 +775,7 @@ display: none;
 
     footer {
         width: 100%;
-        position: fixed;
+        position: absolute;
         bottom: 0;
     }
 
@@ -796,17 +799,12 @@ display: none;
         padding: 0;
         width: 100vh;
     }
-
-    /* CORREÇÃO PRINCIPAL: Faz o container centralizar o conteúdo vertical e horizontalmente */
     .container {
         flex-direction: column;
         width: 100%;
-        /* Garante que o fundo ocupe toda a largura */
         height: 100vh;
-        /* Garante que o fundo ocupe toda a altura */
     }
 
-    /* Oculta o lado esquerdo e o carrossel */
     .left-side,
     .banner {
         display: none;
@@ -826,7 +824,6 @@ display: none;
         justify-content: center;
     }
 
-    /* Centraliza o lado direito (box de login) */
     .right-side {
         width: 100%;
         height: 100vh;
@@ -835,8 +832,6 @@ display: none;
         align-items: center;
         margin-left: 0px;
     }
-
-    /* Ajusta a largura dos elementos internos do right-side para serem responsivos */
     .input-row {
         width: 92%;
         max-width: 350px;
@@ -846,8 +841,6 @@ display: none;
         width: 100%;
         max-width: 375px;
     }
-
-    /* Ajusta o box do auto-login */
     .auto-box {
         width: 70%;
         max-width: 350px;
