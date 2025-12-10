@@ -3,16 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root'
 })
 export class CamisasService {
 
-  private apiUrl = '/api/camisas';
+  private apiUrl = 'http://localhost:3000/api/camisas';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
-  // Busca tudo
-  getAll(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
-  }
+  // Busca tudo
+  getAll(): Observable<any> {
+    return this.http.get<any>(this.apiUrl);
+  }
 }
