@@ -28,7 +28,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "dist/sprint7/$1" 
+      "dest": "dist/sprint_7/$1" 
     }
   ]
 }
