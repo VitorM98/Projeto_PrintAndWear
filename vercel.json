@@ -2,41 +2,33 @@
   "version": 2,
   "builds": [
     {
-      /* 1. Configuração de Build do Frontend (Angular: sprint7) */
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "outputDirectory": "dist/sprint7" 
-        /* Corrigido para 'dist/sprint7' */
+        "outputDirectory": "dist/sprint_7" 
       }
     },
     {
-      /* 2. Configuração de Build da Primeira API (api.js) */
       "src": "api/api.js", 
       "use": "@vercel/node"
     },
     {
-      /* 3. Configuração de Build da Segunda API (server.js) */
       "src": "api/server.js", 
       "use": "@vercel/node"
     }
   ],
   "routes": [
-    /* Rota A: Redireciona chamadas para /api/auth/ para o api/api.js */
     {
       "src": "/api/auth/(.*)", 
       "dest": "api/api.js"
     },
-    /* Rota B: Redireciona chamadas para /api/camisas/ para o api/server.js */
     {
       "src": "/api/camisas/(.*)", 
       "dest": "api/server.js"
     },
-    /* Rota C: Entrega o Frontend do Angular (sprint7) */
     {
       "src": "/(.*)",
       "dest": "dist/sprint7/$1" 
-      /* Corrigido para 'dist/sprint7' */
     }
   ]
 }
