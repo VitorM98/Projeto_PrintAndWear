@@ -1,0 +1,34 @@
+{
+  "masculino": {
+    "P": {
+      "branco": { "vendidos": 12, "estoque": 34 },
+      "preto": { "vendidos": 21, "estoque": 18 }
+    },
+    "M": {
+      "branco": { "vendidos": 15, "estoque": 22 },
+      "preto": { "vendidos": 18, "estoque": 25 }
+    },
+    "G": {
+      "branco": { "vendidos": 13, "estoque": 28 },
+      "preto": { "vendidos": 19, "estoque": 21 }
+    }
+  },
+
+  "feminino": {
+       "P": {
+      "branco": { "vendidos": 18, "estoque": 24 },
+      "preto": { "vendidos": 11, "estoque": 13 }
+    },
+    "M": {
+      "branco": { "vendidos": 19, "estoque": 12 },
+      "preto": { "vendidos": 12, "estoque": 35 }
+    },
+    "G": {
+      "branco": { "vendidos": 9, "estoque": 18 },
+      "preto": { "vendidos": 17, "estoque": 41 }
+    }
+  },
+
+  "valor_total_vendido": 10050,
+  "preco_fixo": 50
+}
