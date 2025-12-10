@@ -207,6 +207,10 @@ border-radius: 50%;
     color: white;
 }
 
+.boasVindasInicio p a{
+    color: white;
+}
+
 /* ===== WRAPPER DO CHAT ===== */
 .chat-wrapper {
   width: 100%;

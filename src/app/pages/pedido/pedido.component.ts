@@ -6,8 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-pedido',
-  // O FormsModule e o FabContactComponent precisam estar aqui.
-  standalone: true, // Adicionado (se não estava, deve estar para projetos Standalone)
+  standalone: true,
   imports: [FormsModule, FabContactComponent], 
   templateUrl: './pedido.component.html',
   styleUrl: './pedido.component.css'
@@ -21,19 +20,40 @@ export class PedidoComponent {
   modelo = signal('masculino');
   cor = signal('preta');
   tamanho = signal('M');
+  
+  // SIGNAL PARA QUANTIDADE
+  quantidade = signal(1); 
+  
   cep = signal('');
   frete = signal(0.00);
   formaPagamento = signal('cartao'); // 'cartao', 'pix', 'boleto'
   
   // Dados da ilustração anexada pelo cliente
   selectedFileName = signal('');
-  uploadedIllustrationUrl = signal(''); // URL para a imagem anexada
+  uploadedIllustrationUrl = signal(''); 
 
-  // 3. Estado da UI
   isModalOpen = signal(false);
 
-  // 4. Lógica para determinar a imagem da camisa base (computed)
-  // Esta função retorna o nome do arquivo da camisa com base nas seleções do cliente.
+  // Array helper para o select de quantidade
+  readonly quantidadesDisponiveis = Array.from({ length: 20 }, (_, i) => i + 1);
+
+  // >> NOVO COMPUTED SIGNAL PARA VALIDAR O PEDIDO <<
+  isPedidoValido = computed(() => {
+    // Verifica seleções de produto (que não devem ser vazias) e quantidade
+    const selecoesCompletas = 
+      this.modelo() !== '' &&
+      this.cor() !== '' &&
+      this.tamanho() !== '' &&
+      this.quantidade() >= 1; 
+
+    // Verifica se o CEP está preenchido corretamente
+    const cepCompleto = this.cep().length === 9;
+    
+    return selecoesCompletas && cepCompleto;
+  });
+  // << FIM DO NOVO COMPUTED SIGNAL >>
+
+ //função retorna o nome do arquivo da camisa com base nas seleções do cliente.
   caminhoImagemCamisa = computed(() => {
     const m = this.modelo();
     const c = this.cor();
@@ -67,7 +87,6 @@ export class PedidoComponent {
       const file = input.files[0];
       this.selectedFileName.set(file.name);
       
-      // Cria uma URL temporária para pré-visualizar a ilustração
       const reader = new FileReader();
       reader.onload = (e) => {
         this.uploadedIllustrationUrl.set(e.target?.result as string);
@@ -81,37 +100,33 @@ export class PedidoComponent {
     }
   }
 
-  // 7. Lógica de Cálculo de Frete (Com Máscara de CEP)
   calcularFrete() {
-    // 1. Remove qualquer caractere que não seja dígito.
     let cepValue = this.cep().replace(/\D/g, ''); 
 
-    // 2. Limita o valor a um máximo de 8 dígitos.
     if (cepValue.length > 8) {
       cepValue = cepValue.substring(0, 8);
     }
 
-    // 3. Aplica a máscara de formatação (5 dígitos + hífen + 3 dígitos)
     if (cepValue.length > 5) {
       cepValue = cepValue.replace(/^(\d{5})(\d)/, '$1-$2');
     }
 
-    // 4. Atualiza o signal 'cep' com o valor formatado/limitado.
+
     this.cep.set(cepValue); 
 
-    // 5. Verifica o tamanho final (9 caracteres no formato "00000-000") para o cálculo do frete
     if (cepValue.length === 9) { 
-      // Simulação: Frete de R$15.00 para CEPs válidos
       this.frete.set(15.00);
     } else {
-      // Frete 0 ou a calcular
       this.frete.set(0.00);
     }
   }
 
   // 8. Cálculo do Total (Computed Signal)
   total = computed(() => {
-    let subtotal = this.valorCamisa() + this.frete();
+    // LÓGICA ALTERADA: Multiplica o valor da camisa pela quantidade
+    const valorTotalCamisas = this.valorCamisa() * this.quantidade();
+    let subtotal = valorTotalCamisas + this.frete();
+    
     // Simulação de desconto PIX
     if (this.formaPagamento() === 'pix') {
       subtotal = subtotal * 0.95; // 5% de desconto
@@ -122,18 +137,26 @@ export class PedidoComponent {
 
   // 9. Lógica do Botão Finalizar Compra
   finalizarCompra() {
+    // Bloqueia a ação se o pedido não for válido
+    if (!this.isPedidoValido()) {
+        alert("Por favor, preencha todos os campos obrigatórios (seleções de produto e CEP) para finalizar a compra.");
+        return; 
+    }
+    
     console.log('--- FINALIZAR COMPRA ---');
     console.log('Detalhes do Pedido:', {
       modelo: this.modelo(),
       cor: this.cor(),
       tamanho: this.tamanho(),
+      quantidade: this.quantidade(), 
       cep: this.cep(),
       pagamento: this.formaPagamento(),
       total: this.total(),
       ilustracao: this.selectedFileName()
     });
     
-    // Ação solicitada: dar um refresh na página
+    alert("Compra realizada! Você pode consultar o status do seu pedido pelo nosso whatsapp informando o seu nome de usuário.");
+    
     window.location.reload();
   }
 

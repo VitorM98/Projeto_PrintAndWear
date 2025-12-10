@@ -23,171 +23,167 @@
     </header>
 
 <div class="pedido-container">
-  
-  <div class="shirt-preview-container">
-    <img [src]="caminhoImagemCamisa()" alt="Camisa Base Selecionada" class="tshirt-base-image">
     
-    @if (uploadedIllustrationUrl()) {
-      <img [src]="uploadedIllustrationUrl()" alt="Ilustração do Cliente" class="illustration-overlay">
-    }
-  </div>
-
-  <!-- 1. Seção de Upload de Ilustração (Mantida) -->
-  <div class="upload-section">
-    <p>Envie a sua ilustração para a gente aqui:</p>
-    <label for="image-upload" class="anexar-btn">
-      Anexar Imagem
-    </label>
-    <input type="file" id="image-upload" (change)="onFileSelected($event)" accept="image/*" style="display: none;">
-    @if (selectedFileName()) {
-      <span class="file-name-display">{{ selectedFileName() }}</span>
-    }
-  </div>
-
-  <!-- 2. Cards de Seleção da Camisa -->
-  <div class="selections-grid">
-    
-    <!-- Card: Modelo da Camisa -->
-    <div class="selection-card">
-      <label for="modelo-select">Modelo da Camisa</label>
-      <select id="modelo-select" 
-              [ngModel]="modelo()"
-              (ngModelChange)="modelo.set($event)"
-              name="modelo"
-              class="custom-select">
-        <option value="masculino">masculino</option>
-        <option value="feminino">feminino</option>
-      </select>
+    <div class="shirt-preview-container">
+        <img [src]="caminhoImagemCamisa()" alt="Camisa Base Selecionada" class="tshirt-base-image">
+        
+        @if (uploadedIllustrationUrl()) {
+            <img [src]="uploadedIllustrationUrl()" alt="Ilustração do Cliente" class="illustration-overlay">
+        }
     </div>
 
-    <!-- Card: Cor da Camisa -->
-    <div class="selection-card">
-      <label for="cor-select">Cor da Camisa</label>
-      <select id="cor-select"
-              [ngModel]="cor()"
-              (ngModelChange)="cor.set($event)"
-              name="cor"
-              class="custom-select">
-        <option value="preta">preta</option>
-        <option value="branca">branca</option>
-      </select>
+    <div class="upload-section">
+        <p>Envie a sua ilustração para a gente aqui:</p>
+        <label for="image-upload" class="anexar-btn">
+            Anexar Imagem
+        </label>
+        <input type="file" id="image-upload" (change)="onFileSelected($event)" accept="image/*" style="display: none;">
+        @if (selectedFileName()) {
+            <span class="file-name-display">{{ selectedFileName() }}</span>
+        }
     </div>
 
-    <!-- Card: Tamanho e Guia -->
-    <div class="selection-card">
-      <div class="size-header">
-        <label for="tamanho-select">Tamanho</label>
-        <button (click)="openModal()" class="guia-tamanho-btn">
-          Guia de tamanho
+    <div class="selections-grid">
+        
+        <div class="selection-card">
+            <label for="modelo-select">Modelo da Camisa</label>
+            <select id="modelo-select" 
+                    [ngModel]="modelo()"
+                    (ngModelChange)="modelo.set($event)"
+                    name="modelo"
+                    class="custom-select">
+                <option value="masculino">masculino</option>
+                <option value="feminino">feminino</option>
+            </select>
+        </div>
+
+        <div class="selection-card">
+            <label for="cor-select">Cor da Camisa</label>
+            <select id="cor-select"
+                    [ngModel]="cor()"
+                    (ngModelChange)="cor.set($event)"
+                    name="cor"
+                    class="custom-select">
+                <option value="preta">preta</option>
+                <option value="branca">branca</option>
+            </select>
+        </div>
+
+        <div class="selection-card">
+            <div class="size-header">
+                <label for="tamanho-select">Tamanho</label>
+                <button (click)="openModal()" class="guia-tamanho-btn">
+                    Guia de tamanho
+                </button>
+            </div>
+            <select id="tamanho-select"
+                    [ngModel]="tamanho()"
+                    (ngModelChange)="tamanho.set($event)"
+                    name="tamanho"
+                    class="custom-select">
+                <option value="P">P</option>
+                <option value="M">M</option>
+                <option value="G">G</option>
+            </select>
+        </div>
+
+        <div class="selection-card">
+            <label for="quantidade-select">Quantidade</label>
+            <select id="quantidade-select"
+                    [ngModel]="quantidade()"
+                    (ngModelChange)="quantidade.set(+$event)"
+                    name="quantidade"
+                    class="custom-select">
+                @for (q of quantidadesDisponiveis; track q) {
+                    <option [value]="q">{{ q }}</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="endereco-form-section">
+        <h2>Endereço de Entrega</h2>
+        <form class="endereco-form">
+            
+            <div class="form-group full-width">
+                <label for="cep">CEP</label>
+                <input type="text" id="cep" [ngModel]="cep()" 
+                    (ngModelChange)="cep.set($event)"
+                    (blur)="calcularFrete()"
+                    name="cep" placeholder="00000-000" required maxlength="9">
+            </div>
+
+            <div class="form-group">
+                <label for="rua">Rua/Logradouro</label>
+                <input type="text" id="rua" name="rua" placeholder="Rua..." required>
+            </div>
+            <div class="form-group">
+                <label for="numero">Número</label>
+                <input type="text" id="numero" name="numero" placeholder="Nº" required>
+            </div>
+            <div class="form-group">
+                <label for="bairro">Bairro</label>
+                <input type="text" id="bairro" name="bairro" placeholder="Bairro..." required>
+            </div>
+            <div class="form-group">
+                <label for="cidade">Cidade/Estado</label>
+                <input type="text" id="cidade" name="cidade" placeholder="Cidade/UF" required>
+            </div>
+        </form>
+    </div>
+
+    <div class="pagamento-section">
+        <h2>Forma de Pagamento</h2>
+        <div class="payment-options">
+            
+            <label class="payment-option" [class.selected]="formaPagamento() === 'cartao'">
+                <input type="radio" name="payment-method" value="cartao" (change)="formaPagamento.set('cartao')" [checked]="formaPagamento() === 'cartao'">
+                Cartão de Crédito
+            </label>
+            
+            <label class="payment-option" [class.selected]="formaPagamento() === 'pix'">
+                <input type="radio" name="payment-method" value="pix" (change)="formaPagamento.set('pix')" [checked]="formaPagamento() === 'pix'">
+                Pix (5% de Desconto!)
+            </label>
+
+            <label class="payment-option" [class.selected]="formaPagamento() === 'boleto'">
+                <input type="radio" name="payment-method" value="boleto" (change)="formaPagamento.set('boleto')" [checked]="formaPagamento() === 'boleto'">
+                Boleto
+            </label>
+        </div>
+    </div>
+
+    <div class="calculo-section">
+        <h2>Cálculo:</h2>
+        <div class="calculo-details">
+            <p>- Valor das camisas ({{ quantidade() }} un.): <span class="value">R$ {{(valorCamisa() * quantidade()).toFixed(2).replace('.', ',') }}</span></p>
+            <p>- Valor do frete: <span class="value">R$ {{ frete().toFixed(2).replace('.', ',') }}</span></p>
+            <div class="total-line">
+                <p>Total: <span class="total-value">R$ {{ total().toFixed(2).replace('.', ',') }}</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="submit-section">
+        <button (click)="finalizarCompra()" class="finalizar-btn">
+            Finalizar compra.
         </button>
-      </div>
-      <select id="tamanho-select"
-              [ngModel]="tamanho()"
-              (ngModelChange)="tamanho.set($event)"
-              name="tamanho"
-              class="custom-select">
-        <option value="P">P</option>
-        <option value="M">M</option>
-        <option value="G">G</option>
-      </select>
     </div>
-  </div>
 
-  <!-- 3. Formulário de Endereço (para cálculo de frete) -->
-  <div class="endereco-form-section">
-    <h2>Endereço de Entrega</h2>
-    <form class="endereco-form">
-      
-      <!-- Linha CEP e Botão Calcular (Para mock) -->
-      <div class="form-group full-width">
-        <label for="cep">CEP</label>
-        <input type="text" id="cep" [ngModel]="cep()" 
-               (ngModelChange)="cep.set($event)"
-               (blur)="calcularFrete()"
-               name="cep" placeholder="00000-000" required maxlength="9">
-      </div>
-
-      <!-- Outros campos de endereço (não ligados a Signals, apenas para completar o formulário) -->
-      <div class="form-group">
-        <label for="rua">Rua/Logradouro</label>
-        <input type="text" id="rua" name="rua" placeholder="Rua..." required>
-      </div>
-      <div class="form-group">
-        <label for="numero">Número</label>
-        <input type="text" id="numero" name="numero" placeholder="Nº" required>
-      </div>
-      <div class="form-group">
-        <label for="bairro">Bairro</label>
-        <input type="text" id="bairro" name="bairro" placeholder="Bairro..." required>
-      </div>
-      <div class="form-group">
-        <label for="cidade">Cidade/Estado</label>
-        <input type="text" id="cidade" name="cidade" placeholder="Cidade/UF" required>
-      </div>
-    </form>
-  </div>
-
-  <!-- 4. Formas de Pagamento -->
-  <div class="pagamento-section">
-    <h2>Forma de Pagamento</h2>
-    <div class="payment-options">
-      
-      <!-- Cartão de Crédito -->
-      <label class="payment-option" [class.selected]="formaPagamento() === 'cartao'">
-        <input type="radio" name="payment-method" value="cartao" (change)="formaPagamento.set('cartao')" [checked]="formaPagamento() === 'cartao'">
-        Cartão de Crédito
-      </label>
-      
-      <!-- Pix -->
-      <label class="payment-option" [class.selected]="formaPagamento() === 'pix'">
-        <input type="radio" name="payment-method" value="pix" (change)="formaPagamento.set('pix')" [checked]="formaPagamento() === 'pix'">
-        Pix (5% de Desconto!)
-      </label>
-
-      <!-- Boleto -->
-      <label class="payment-option" [class.selected]="formaPagamento() === 'boleto'">
-        <input type="radio" name="payment-method" value="boleto" (change)="formaPagamento.set('boleto')" [checked]="formaPagamento() === 'boleto'">
-        Boleto
-      </label>
-    </div>
-  </div>
-
-  <!-- 5. Cálculo e Total -->
-  <div class="calculo-section">
-    <h2>Cálculo:</h2>
-    <div class="calculo-details">
-      <p>- Valor da camisa: <span class="value">R$ {{ valorCamisa().toFixed(2).replace('.', ',') }}</span></p>
-      <p>- Valor do frete: <span class="value">R$ {{ frete().toFixed(2).replace('.', ',') }}</span></p>
-      <div class="total-line">
-        <p>Total: <span class="total-value">R$ {{ total().toFixed(2).replace('.', ',') }}</span></p>
-      </div>
-    </div>
-  </div>
-
-  <!-- 6. Botão Finalizar Compra -->
-  <div class="submit-section">
-    <button (click)="finalizarCompra()" class="finalizar-btn">
-      Finalizar compra.
-    </button>
-  </div>
-
-  <!-- Modal do Guia de Tamanho -->
-  @if (isModalOpen()) {
-    <div class="modal-overlay" (click)="closeModal()">
-      <div class="modal-content" (click)="$event.stopPropagation()">
-        
-        <!-- Botão de fechar do modal -->
-        <button (click)="closeModal()" class="modal-close-btn">
-          &times;
-        </button>
-        
-        <h3>Guia de Tamanho</h3>
-        
-        <!-- Imagem do Guia de Tamanho -->
-        <img src="guiadetamanho.png" alt="Guia de Tamanho da Camisa" class="modal-image">
-      </div>
-    </div>
-  }
+    @if (isModalOpen()) {
+        <div class="modal-overlay" (click)="closeModal()">
+            <div class="modal-content" (click)="$event.stopPropagation()">
+                
+                <button (click)="closeModal()" class="modal-close-btn">
+                    &times;
+                </button>
+                
+                <h3>Guia de Tamanho</h3>
+                
+                <img src="guiadetamanho.png" alt="Guia de Tamanho da Camisa" class="modal-image">
+            </div>
+        </div>
+    }
 </div>
 
     <footer>
@@ -198,9 +194,9 @@
             <div class="footerCopyright">
                 <p>© 2025 Todos os direitos reservados.</p>
             </div>
-                              <div class="contato">
-        <app-fab-contact></app-fab-contact>
-      </div>
+            <div class="contato">
+                <app-fab-contact></app-fab-contact>
+            </div>
         </div>
     </footer>
 </div>

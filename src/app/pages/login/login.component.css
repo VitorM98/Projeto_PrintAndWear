@@ -121,6 +121,15 @@ h2 {
 p {
     color: white;
     margin-bottom: 5px;
+    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0.355);
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+p a{
+    color: white;
+    font-weight: bolder
 }
 
 
@@ -477,6 +486,7 @@ background-color: rgba(128, 128, 128, 0.5);
 box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.2);
 position: absolute;
 bottom: 0;
+padding: 5px;
 }
 
 .footerContainer {
@@ -489,7 +499,7 @@ bottom: 0;
 }
 
 .instagramFooter {
-    width: 70px;
+    width: 45px;
     transition: transform 0.3s ease;
 }
 
@@ -860,4 +870,15 @@ display: none;
     .right-side h2 {
         margin-left: 60px;
     }
+
+    .cadastro{
+        margin: 0;
+        margin-top: -20px;
+        margin-bottom: 10px;
+        padding: 0;
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
 }

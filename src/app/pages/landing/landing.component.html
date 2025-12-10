@@ -1,0 +1,66 @@
+<div class="container">
+
+    <div class="main">
+        <div class="login">
+            <p>Faça <a href="login">login</a> ou <a href="cadastro">cadastre-se</a> agora!</p>
+        </div>
+
+        <div class="logo">
+            <a href="landing"><img src="printandwearlogo.png" alt="logo print and wear"></a>
+        </div>
+
+        <h1>Seja bem-vindo à nossa loja!</h1>
+        <div class="textoInicial">
+            <h3>Crie imagens inéditas utilizando apenas a sua imaginação e a Inteligência Artificial, e personalize sua camisa!</h3>
+            </div>
+
+
+<div class="carousel-container">
+    
+    <button 
+        (click)="prevImage()" 
+        class="carousel-control prev">
+        &#10094; </button>
+
+    <div class="carousel-viewer">
+        <div class="image-wrapper" 
+             [style.transform]="'translateX(' + (-currentIndex * 100) + '%)'">
+            
+            <img *ngFor="let image of images; let i = index" 
+                 [src]="image" 
+                 alt="Carrossel Imagem {{ i + 1 }}" 
+                 class="carousel-image">
+        </div>
+    </div>
+
+    <button 
+        (click)="nextImage()" 
+        class="carousel-control next">
+        &#10095; </button>
+</div>
+
+<div class="button">
+    <a href="login"><button>Faça login clicando aqui e comece agora mesmo! </button></a>
+</div>
+
+<div class="informativo">
+    <img src="2.png" alt="">
+    <div class="informativoBody">
+    <p>Acreditamos que em algum momento você já pensou em ter uma camisa personalizada com algo que só você tem em mente ou então uma imagem sobre um assunto que você e seus amigos conhecem e virou meme entre vocês, por exemplo. Sabemos que não dá para encontrar nenhum lugar que proporcione essa experiência de ter uma vestimenta com uma ilustração inventada por você mesmo, então é a nossa missão de trazer essa oportunidade pra você!</p>
+    </div>
+</div>
+
+    </div>
+
+                    <footer>
+                <div class="footerContainer">
+                    <div class="footerSocialMedia">
+                <a href=""><img class="instagramFooter" src="instagram.png" alt=""></a>
+                </div>
+                <div class="footerCopyright">
+                    <p>© 2025 Todos os direitos reservados.</p>
+                </div>
+                </div>
+            </footer>
+</div>
+

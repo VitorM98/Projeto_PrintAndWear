@@ -1,0 +1,350 @@
+@import url('https://fonts.cdnfonts.com/css/donegal-one');
+
+/* ======== RESET ======== */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: 0;
+    padding: 0;
+    background-image: url("../../../../public/bck1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main{
+    background-color: rgba(125, 121, 121, 0.443);
+    min-height: 100vh;
+    width: 50%;
+margin-left: auto;
+margin-right: auto;
+display: flex;
+flex-direction: column;
+    box-shadow:
+        -5px 0px 5px 0 rgba(125, 121, 121, 0.443),
+        5px 0px 5px 0 rgba(125, 121, 121, 0.443);
+        align-items: center;
+}
+
+/* logo */
+
+.logo{
+position: relative;
+text-align: center;
+margin-top: 2%;
+}
+
+.logo img{
+    width: 30%;
+    border-radius: 50%;
+        box-shadow:
+        -5px 0px 5px 0 rgba(125, 121, 121, 0.443),
+        5px 0px 5px 0 rgba(125, 121, 121, 0.443);
+}
+
+/* login e cadastro */
+
+.login{
+    margin-left: auto;
+    margin-right: 2%;
+    margin-top: 1%;
+}
+
+.login p{
+    font-size: 17px;
+    font-weight: bolder;
+    color: black;
+}
+
+.login p a{
+    text-decoration: underline;
+    color: black;
+}
+
+/* texto */
+
+h1{
+    margin-top: 3%;
+    margin-bottom: 3%;
+        font-family: 'Donegal One', sans-serif;
+}
+
+.textoInicial{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.textoInicial h3{
+    font-size: 20px;
+    text-align: center;
+        font-family: 'Donegal One', sans-serif;
+}
+
+/* imagens */
+
+.carousel-container {
+    display: flex;
+    align-items: center; 
+    max-width: 600px; 
+    margin: 40px auto; 
+    position: relative;
+}
+
+.carousel-viewer {
+    flex-grow: 1;
+    overflow: hidden;
+    width: 100%;
+}
+
+.image-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-image {
+    min-width: 100%;
+    width: 100%; 
+    height: auto;
+    object-fit: cover;
+}
+
+.carousel-control {
+    background: rgba(125, 121, 121, 0.443);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 24px;
+    line-height: 1; /* Alinha o texto do botão (setas) */
+    user-select: none; /* Impede seleção de texto */
+    transition: background 0.3s;
+}
+
+.carousel-control:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.carousel-control:hover:not(:disabled) {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+
+/* informativo */
+.informativo{
+    display: flex;
+    flex-direction: column;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    background-color: #ffffff;
+    border-radius: 12px;
+    width: 60%;
+    padding: 40px 0 40px 0;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+overflow: hidden;
+}
+
+.informativo img{
+    width: 300px;
+   margin-left: auto;
+   margin-right: auto;
+   margin-bottom: 10px;
+}
+
+.informativo p{
+width: 62%;
+font-weight: 500;
+margin-left: auto;
+margin-right: auto;
+text-align: center;
+}
+
+.informativoBody {
+    padding: 20px;
+    background-color: #f7f7f7; 
+    border-top: 1px solid #eee; 
+}
+
+/* botão */
+
+.button button {
+    width: 500px;
+    padding: 12px;
+    background: #b9c0c4;
+    border: none;
+    border-radius: 6px;
+    color: black;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 5%;
+}
+
+.button button:hover {
+    background: #a4adb3;
+}
+
+/* footer */
+
+footer {
+width: 100%;
+background-color: rgba(128, 128, 128, 0.5);
+box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.2);
+position: static;
+bottom: 0;
+padding-top: 3px;
+padding-bottom: 3px;
+}
+
+.footerContainer {
+    align-items: center;
+    display: flex;
+}
+
+.footerCopyright {
+    margin-left: 40%;
+}
+
+.instagramFooter {
+    width: 45px;
+    transition: transform 0.3s ease;
+}
+
+.instagramFooter:hover {
+    transform: scale(1.2);
+}
+
+
+@media (max-width: 1024px) {
+    .main {
+        width: 70%; 
+        min-height: auto; 
+    }
+
+    .textoInicial {
+        width: 80%; 
+    }
+
+    .carousel-container {
+        max-width: 90%; 
+    }
+
+    .button button {
+        width: 80%;
+    }
+
+    .informativo {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+    
+    .informativo p {
+        width: 80%; 
+        margin-left: 0;
+        margin-bottom: 20px;
+        order: 2; 
+    }
+
+    .informativo img {
+        width: 50%;
+        max-width: 300px;
+        order: 1; 
+    }
+    
+
+    .footerCopyright {
+        margin-left: 20%;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .main {
+        width: 100%; 
+        box-shadow: none; 
+    }
+    
+    
+    .login {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+   
+    .logo img {
+        width: 50%; 
+    }
+    
+
+    h1 {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .textoInicial h3 {
+        font-size: 16px;
+    }
+    
+ 
+    .carousel-container {
+        max-width: 100%;
+        margin: 20px 0;
+    }
+    
+
+    .button button {
+        width: 90%;
+        font-size: 16px;
+    }
+
+    .button{
+        text-align: center;
+    }
+
+    .informativo{
+        width: 90%;
+    }
+    
+    .informativo p {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .informativo img {
+        width: 80%;
+    }
+
+    footer {
+        padding: 10px 0;
+    }
+    
+    .footerContainer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footerSocialMedia {
+        order: 2;
+        margin-top: 10px;
+    }
+
+    .footerCopyright {
+        margin-left: 0;
+        margin-bottom: 10px;
+        order: 1; 
+    }
+}
